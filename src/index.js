@@ -3,14 +3,14 @@
 /* eslint import/no-dynamic-require: [0] */
 /* eslint global-require: [0] */
 
-export default function laconiar(servicesPath: string) {
+function factory(servicesPath: string) {
   return (...args: any) => new Proxy(
     {},
     {
       get(target, name: string) {
         if (!target[name]) {
-          const factory = require(`${servicesPath}/${name}`);
-          target[name] = factory(...args);
+          const serviceFactory = require(`${servicesPath}/${name}`);
+          target[name] = serviceFactory(...args);
         }
         return target[name];
       },
@@ -18,6 +18,11 @@ export default function laconiar(servicesPath: string) {
   );
 }
 
-laconiar.factory = (servicesPath: string) => (...args) => ({
-  S: laconiar(servicesPath)(...args),
-});
+export default function laconias(servicesPath: string) {
+  const serviceFactory = factory(servicesPath);
+  const result = (...args: any) => ({
+    S: serviceFactory(...args),
+  });
+  result.factory = serviceFactory;
+  return result;
+}

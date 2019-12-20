@@ -1,10 +1,10 @@
-# laconiar
+# laconias
 
 > requirejs like service for laconia
 
-[![npm](https://img.shields.io/npm/v/laconiar.svg?style=flat-square)](https://www.npmjs.com/package/laconiar)
-[![npm](https://img.shields.io/npm/dt/laconiar.svg?style=flat-square)](https://npm-stat.com/charts.html?package=laconiar&from=2016-04-01)
-[![Codecov branch](https://img.shields.io/codecov/c/github/hugosenari/laconiar/master.svg?style=flat-square)](https://codecov.io/github/hugosenari/laconiar)
+[![npm](https://img.shields.io/npm/v/laconias.svg?style=flat-square)](https://www.npmjs.com/package/laconias)
+[![npm](https://img.shields.io/npm/dt/laconias.svg?style=flat-square)](https://npm-stat.com/charts.html?package=laconias&from=2016-04-01)
+[![Codecov branch](https://img.shields.io/codecov/c/github/hugosenari/laconias/master.svg?style=flat-square)](https://codecov.io/github/hugosenari/laconias)
 <br />
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
@@ -20,43 +20,34 @@ With this you can `require' things and inject/mock them when testing
 ## Installation
 
 ```sh
-npm install --save laconiar
+npm install --save laconias
 ```
 
 ## Usage
 
 ```js
+
+// services/print.js
+
+module.exports = laconiaContext => data => console.log(data);
+
+// index.js
+
 const laconia require('@laconia/core');
-const R = require('laconiar');
+const S = require('laconias');
 
 const app = (event, {
-  R: {
-    fs, // this same as const fs = require('fs');
-    fs: { createReadStream }, // this same as const { createReadStream } = require('fs');
-    'aws-sdk': awsSDK, // this is same as const awsSDK = require('aws-sdk');
-    './spam': err, // this will not work;
-    `${__dirname}/spam`: spam // this will work
-  }
+  S: { print },
+  services: { print: print2 },
 }) => {
-  // do something with required modules;
-  return createReadStream();
+  // do something with service;
+  print(event);
+  print2(event)
 };
 
-exports.handler = laconia(app).register(R.factory());
-
-// test app
-
-describe('testing app', () => {
-  it('mocking requirements', () => {
-    const createReadStream = jest.fn();
-    app(
-      R: {
-        fs: { createReadStream }
-      }
-    );
-    expect(createReadStream).toHaveBeenCalled();
-  });
-});
+exports.handler = laconia(app)
+  .register(S.factory(`${__dirname}/services`))
+  .register('services', S(`${__dirname}/services`)); // o
 
 ```
 
@@ -74,14 +65,14 @@ You couldn't, since your dependency are loaded dynamically. Isn't not impossible
 
 ## Related
 
-* [laconiar](/hugosenari/laconiar/)
+* [laconias](/hugosenari/laconias/)
 
 ## Contributors
 
 Thanks goes to these people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://avatars2.githubusercontent.com/u/22868432?v=3" width="100px;"/><br /><sub>hugosenari</sub>](https://github.com/hugosenari)<br />[💻](https://github.com/hugosenari/laconiar/commits?author=hugosenari "Code") [📖](https://github.com/hugosenari/laconiar/commits?author=hugosenari "Documentation") [🚇](#infra-luftywiranda13 "Infrastructure (Hosting, Build-Tools, etc)") |
+| [<img src="https://avatars2.githubusercontent.com/u/22868432?v=3" width="100px;"/><br /><sub>hugosenari</sub>](https://github.com/hugosenari)<br />[💻](https://github.com/hugosenari/laconias/commits?author=hugosenari "Code") [📖](https://github.com/hugosenari/laconias/commits?author=hugosenari "Documentation") [🚇](#infra-luftywiranda13 "Infrastructure (Hosting, Build-Tools, etc)") |
 | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
