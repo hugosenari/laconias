@@ -1,6 +1,6 @@
 {
-  "name": "laconiar",
-  "version": "1.3.0",
+  "name": "laconias",
+  "version": "0.0.1",
   "description": "requirejs like service for laconia",
   "license": "MIT",
   "author": {
@@ -8,7 +8,7 @@
     "email": "hugosenari@gmail.com",
     "url": "https://github.com/hugosenari/"
   },
-  "repository": "https://github.com/hugosenari/laconiar",
+  "repository": "https://github.com/hugosenari/laconias",
   "engines": {
     "node": ">=10"
   },

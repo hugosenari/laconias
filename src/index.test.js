@@ -1,23 +1,17 @@
-import laconiar from './index';
+import laconias from './index';
 /* eslint global-require: [0] */
 
 describe('index.js', () => {
   it('should require something', () => {
-    const target = laconiar()();
-    const expected = require('fs');
-    expect(target.fs).toEqual(expected);
-    expect(target.fs).toEqual(expected);
-  });
-  it('should use defaults', () => {
-    const expected = 'spam';
-    const target = laconiar({ fs: expected })();
-    expect(target.fs).toEqual(expected);
-    expect(target.fs).toEqual(expected);
+    const args = [0, 1, 2];
+    const target = laconias('./services')(...args);
+    expect(target.echo).toEqual(args);
   });
 
-  it('shoudl return lacoinar factory', () => {
-    const { R: target } = laconiar.factory();
-    const expected = require('fs');
-    expect(target.fs).toEqual(expected);
+  it('should return laconias factory', () => {
+    const args = [0, 1, 2];
+    const { S: target } = laconias.factory('./services')(...args);
+    expect(target.echo).toEqual(args);
+    expect(target.echo).toEqual(args);
   });
 });

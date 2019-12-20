@@ -74,7 +74,7 @@ You couldn't, since your dependency are loaded dynamically. Isn't not impossible
 
 ## Related
 
-// TODO
+* [laconiar](/hugosenari/laconiar/)
 
 ## Contributors
 
