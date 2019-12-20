@@ -34,7 +34,7 @@ module.exports = laconiaContext => data => console.log(data);
 // index.js
 
 const laconia require('@laconia/core');
-const S = require('laconias');
+const laconias = require('laconias');
 
 const app = (event, {
   S: { print },
@@ -45,9 +45,12 @@ const app = (event, {
   print2(event)
 };
 
+const S = laconias(`${__dirname}/services`)
+
 exports.handler = laconia(app)
-  .register(S.factory(`${__dirname}/services`))
-  .register('services', S(`${__dirname}/services`)); // o
+  .register(S)
+  //.register('otherServices', laconias(`${__dirname}/otherPath`).factory);
+  .register('services', S.factory);
 
 ```
 
