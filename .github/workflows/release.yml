@@ -25,6 +25,9 @@ jobs:
         run: npm i
       - name: Build and test
         run: npm start validate
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   ReleaseGH:
     needs: Validate
