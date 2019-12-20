@@ -1,0 +1,22 @@
+{
+  "projectName": "laconiar",
+  "projectOwner": "hugosenari",
+  "files": [
+    "readme.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "hugosenari",
+      "name": "hugosenari",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/22868432?v=3",
+      "profile": "https://github.com/hugosenari",
+      "contributions": [
+        "code",
+        "doc",
+        "infra"
+      ]
+    }
+  ]
+}
