@@ -14,8 +14,9 @@
   },
   "scripts": {
     "start": "nps --no-scripts",
-    "test": "nps test",
-    "release": "release-it"
+    "test": "nps validate",
+    "release": "release-it",
+    "build": "nps build"
   },
   "main": "dist/index.js",
   "files": [
