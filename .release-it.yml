@@ -3,4 +3,4 @@ npm:
 git:
   prequireCleanWorkingDir: false
 github:
-  release: true
+  release: false
